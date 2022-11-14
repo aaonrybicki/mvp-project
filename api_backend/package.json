@@ -1,0 +1,12 @@
+{
+  "name": "api_backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "config.js",
+  "scripts": {
+    "start:production": "mvp.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

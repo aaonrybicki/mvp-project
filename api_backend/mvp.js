@@ -1,18 +1,15 @@
 const express = require('express');
 const {Pool} = require('pg');
-const port = 8001;
 const app = express();
 app.use(express.json());
 const cors = require('cors');
 app.use(cors());
-//do not put your connection string in your js, move it to a config.json file and then gitignore it so it doesnt get uploade
-const pool = new Pool({
-	user: 'postgres',
-	host: '127.0.0.1',
-	database: 'mvp',
-	password: 'docker',
-	port: 5432,
+const config=require('./config')[process.env.NODE_ENV||'dev'];
+const PORT = config.port;
+const pool= new Pool({
+	connectionString: config.connectionString
 });
+
 pool.connect();
 
 
@@ -89,6 +86,6 @@ app.delete('/menuItems/:id', (req, res) => {
 });
 
 
-app.listen(port, () => {
-	console.log(`listening on port ${port}`);
+app.listen(PORT, () => {
+	console.log(`listening on port ${PORT}`);
 });

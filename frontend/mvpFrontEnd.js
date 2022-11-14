@@ -38,7 +38,7 @@ function DisplayMenuItems(result) {
 		h1Button.innerHTML = 'delete this menu item';
 		ul.setAttribute('id', foodItems.id);
 		ul.append(h1Button);
-		//=nested delete event handler with a button to delete the menu item selected this is where the crud operation DELETE is=//
+		//==== delete event handler with a button to delete the menu item selected this is where the crud operation DELETE is=//
 		h1Button.addEventListener('click', function(e){
 			var id = e.target.parentNode.id;
 			e.target.parentElement.remove();
@@ -104,16 +104,14 @@ const form = document. getElementById('form');
 form.addEventListener('submit', function(e) { 
 	e.preventDefault();
 	const menuItem = {};
-	menuItem.name = document.querySelector("#menuName").value;
-	menuItem.description = document.querySelector("#menuDescription").value;
+	menuItem.name = document.querySelector('#menuName').value;
+	menuItem.description = document.querySelector('#menuDescription').value;
 	menuItem.calories = document.querySelector('#menuCalorie').value;
 	menuItem.price = document.querySelector('#menuPrice').value;
 	menuItem.menu_categories_id = document.querySelector('#foriegnKey').value;
-
-	console.log(menuItem);
 	
 
-	fetch(`http://localhost:8001/menuItems`, {
+	fetch('http://localhost:8001/menuItems', {
 		method: 'POST', 
 		headers: {
 			'Content-Type': 'application/json'
@@ -123,5 +121,26 @@ form.addEventListener('submit', function(e) {
 		.then(res => res.json())
 		.then(data => DisplayMenuItems(data))
 		.catch(err => console.log(err));
-});
+	
+	const form = document. getElementById('form');
 
+form.addEventListener('patch', function(e) { 
+	e.preventDefault();
+	const menuItem = {};
+	menuItem.name = document.querySelector('#menuName').value;
+	menuItem.description = document.querySelector('#menuDescription').value;
+	menuItem.calories = document.querySelector('#menuCalorie').value;
+	menuItem.price = document.querySelector('#menuPrice').value;
+	menuItem.menu_categories_id = document.querySelector('#foriegnKey').value;
+
+	fetch('http://localhost:8001/menuItems', {
+		method: 'PATCH', 
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(menuItem)
+	})
+		.then(res => res.json())
+		.then(data => DisplayMenuItems(data))
+		.catch(err => console.log(err));
+});

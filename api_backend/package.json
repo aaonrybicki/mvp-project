@@ -4,7 +4,7 @@
   "description": "",
   "main": "config.js",
   "scripts": {
-    "start:production": "mvp.js"
+    "start:production": "node mvp.js"
   },
   "keywords": [],
   "author": "",

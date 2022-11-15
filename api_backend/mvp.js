@@ -5,8 +5,8 @@ app.use(express.json());
 const cors = require('cors');
 app.use(cors());
 const config=require('./config')[process.env.NODE_ENV||'dev'];
-// const PORT = config.port;
-const PORT = 8001;
+const PORT = config.port;
+// const PORT = 8001;
 const pool= new Pool({
 	connectionString: config.connectionString
 });

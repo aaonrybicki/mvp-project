@@ -1,4 +1,6 @@
 //====event listeners for get method that essentially loads the fetch upon clicking the menuitems button and menu category button ===//
+const apiUrl = 'https://los-portales.onrender.com/';
+
 const menuItemButton = document.getElementById('menuItems');
 menuItemButton.addEventListener('click', clearData);
 menuItemButton.addEventListener('click', getMenuItems);
@@ -11,7 +13,7 @@ function getMenuItems() {
 		method: 'GET',
 		redirect: 'follow'
 	};
-	fetch('http://localhost:8001/menuItems', requestOptions)
+	fetch(apiUrl + 'menuItems', requestOptions)
 		.then(response => response.json())
 		.then(result => {
 			console.log(result);
@@ -47,7 +49,7 @@ function DisplayMenuItems(result) {
 				method: 'DELETE',
 				redirect: 'follow'};
  
-			fetch(`http://localhost:8001/menuItems/${id}`, requestOptions)
+			fetch(`${apiUrl}menuItems/${id}`, requestOptions)
 				.then(response => response.json())
 				.then(result => console.log(result))
 				.catch(error => console.log('error', error));
@@ -72,7 +74,7 @@ function getMenuCategory() {
 		method: 'GET',
 		redirect: 'follow'
 	};
-	fetch('http://localhost:8001/menuCategories', requestOptions)
+	fetch(apiUrl + 'menuCategories', requestOptions)
 		.then(response => response.json())
 		.then(result => {
 			console.log(result);
@@ -104,7 +106,6 @@ function clearData() {
 const addButton = document.getElementById('submit');
 addButton.addEventListener('click', function(e) { 
 	e.preventDefault();
-	console.log('shitt');
 	const menuItem = {};
 	menuItem.name = document.querySelector('#menuName').value;
 	menuItem.description = document.querySelector('#menuDescription').value;
@@ -113,7 +114,7 @@ addButton.addEventListener('click', function(e) {
 	menuItem.menu_categories_id = document.querySelector('#foriegnKey').value;
 	
 
-	fetch('http://localhost:8001/menuItems', {
+	fetch(apiUrl + 'menuItems', {
 		method: 'POST', 
 		headers: {
 			'Content-Type': 'application/json'
@@ -136,7 +137,7 @@ updateButton.addEventListener('click', function(e) {
 	menuItem.menu_categories_id = document.querySelector('#foriegnKey').value;
 	
 
-	fetch('http://localhost:8001/menuItems', {
+	fetch(apiUrl + 'menuItems', {
 		method: 'PATCH', 
 		headers: {
 			'Content-Type': 'application/json'

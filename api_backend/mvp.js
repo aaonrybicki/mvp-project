@@ -5,7 +5,8 @@ app.use(express.json());
 const cors = require('cors');
 app.use(cors());
 const config=require('./config')[process.env.NODE_ENV||'dev'];
-const PORT = config.port;
+// const PORT = config.port;
+const PORT = 8001;
 const pool= new Pool({
 	connectionString: config.connectionString
 });
@@ -54,26 +55,40 @@ VALUES ('${name}', '${description}', ${calories}, ${price}, ${menu_categories_id
 		})
 		.catch(e => console.error(e.stack));
 });
-
-
-app.patch('/menuItems/:id', (req, res)=> {
+app.patch('/menuItems', (req, res) => {
+	// console.log(req.body);
 	var menuItems= req.body;
 	var name= menuItems.name;
 	var description= menuItems.description;
-	var calories=parseInt(menuItems.calories);
-	var price=parseInt(menuItems.price);
-	var menu_categories_id= parseInt(menuItems.menu_categories_id); 
-	let id = req.params.id;
-	let query = 'UPDATE menuItems SET name=$1, description=$2, calories=$3, price=$4, menu_categories_id=$5 WHERE id=$6';
-	let values = [name, description, calories, price, menu_categories_id, id];
-	console.log(values);
-          
-	pool.query(query, values)
-		.then((result) => {
+	var calories= (menuItems.calories);
+	var price= (menuItems.price);
+	var menu_categories_id= menuItems.menu_categories_id; 
+	// console.log(menu_categories_id);
+	pool.query(`UPDATE menuItems SET name='${name}',description='${description}', calories=${calories}, price=${price}, menu_categories_id=${menu_categories_id} WHERE name='${name}'`)
+		.then(result =>{
 			res.status(200).send(result.rows);
 		})
-		.catch((err) => console.error(err.stack));
+		.catch(e => console.error(e.stack));
 });
+
+// app.patch('/menuItems/:id', (req, res)=> {
+// 	var menuItems= req.body;
+// 	var name= menuItems.name;
+// 	var description= menuItems.description;
+// 	var calories=parseInt(menuItems.calories);
+// 	var price=parseInt(menuItems.price);
+// 	var menu_categories_id= parseInt(menuItems.menu_categories_id); 
+// 	let id = req.params.id;
+// 	let query = 'UPDATE menuItems SET name=$1, description=$2, calories=$3, price=$4, menu_categories_id=$5 WHERE id=$6';
+// 	let values = [name, description, calories, price, menu_categories_id, id];
+// 	console.log(values);
+          
+// 	pool.query(query, values)
+// 		.then((result) => {
+// 			res.status(200).send(result.rows);
+// 		})
+// 		.catch((err) => console.error(err.stack));
+// });
 
 
 app.delete('/menuItems/:id', (req, res) => {

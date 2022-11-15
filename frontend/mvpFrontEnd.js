@@ -25,6 +25,7 @@ function DisplayMenuItems(result) {
 		const divSection2 = document.getElementById('displaySection');
 		const foodItems = result[i];
 		console.log(foodItems);
+
 		const name = foodItems.name;
 		const description = foodItems.description;
 		const calories = foodItems.calories;
@@ -99,10 +100,11 @@ function clearData() {
 	document.getElementById('displaySection').innerHTML = '';
 }
 
-const form = document. getElementById('form');
-
-form.addEventListener('submit', function(e) { 
+// const form = document.getElementById('form');
+const addButton = document.getElementById('submit');
+addButton.addEventListener('click', function(e) { 
 	e.preventDefault();
+	console.log('shitt');
 	const menuItem = {};
 	menuItem.name = document.querySelector('#menuName').value;
 	menuItem.description = document.querySelector('#menuDescription').value;
@@ -121,26 +123,29 @@ form.addEventListener('submit', function(e) {
 		.then(res => res.json())
 		.then(data => DisplayMenuItems(data))
 		.catch(err => console.log(err));
+});
+const updateButton = document.getElementById('update');
+updateButton.addEventListener('click', function(e) { 
+	e.preventDefault();
+	console.log('updateButton');
+	const menuItem = {};
+	menuItem.name = document.querySelector('#menuName').value;
+	menuItem.description = document.querySelector('#menuDescription').value;
+	menuItem.calories = document.querySelector('#menuCalorie').value;
+	menuItem.price = document.querySelector('#menuPrice').value;
+	menuItem.menu_categories_id = document.querySelector('#foriegnKey').value;
 	
-	const form = document. getElementById('form');
 
-// form.addEventListener('patch', function(e) { 
-// 	e.preventDefault();
-// 	const menuItem = {};
-// 	menuItem.name = document.querySelector('#menuName').value;
-// 	menuItem.description = document.querySelector('#menuDescription').value;
-// 	menuItem.calories = document.querySelector('#menuCalorie').value;
-// 	menuItem.price = document.querySelector('#menuPrice').value;
-// 	menuItem.menu_categories_id = document.querySelector('#foriegnKey').value;
-
-// 	fetch('http://localhost:8001/menuItems', {
-// 		method: 'PATCH', 
-// 		headers: {
-// 			'Content-Type': 'application/json'
-// 		},
-// 		body: JSON.stringify(menuItem)
-// 	})
-// 		.then(res => res.json())
-// 		.then(data => DisplayMenuItems(data))
-// 		.catch(err => console.log(err));
+	fetch('http://localhost:8001/menuItems', {
+		method: 'PATCH', 
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(menuItem)
+	})
+		.then(res => res.json())
+		.then(data => DisplayMenuItems(data))
+		
+		.catch(err => console.log(err));
+	// setTimeout(menuItemButton.click(), 3000);
 });

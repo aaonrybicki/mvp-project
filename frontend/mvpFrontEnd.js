@@ -124,23 +124,23 @@ form.addEventListener('submit', function(e) {
 	
 	const form = document. getElementById('form');
 
-form.addEventListener('patch', function(e) { 
-	e.preventDefault();
-	const menuItem = {};
-	menuItem.name = document.querySelector('#menuName').value;
-	menuItem.description = document.querySelector('#menuDescription').value;
-	menuItem.calories = document.querySelector('#menuCalorie').value;
-	menuItem.price = document.querySelector('#menuPrice').value;
-	menuItem.menu_categories_id = document.querySelector('#foriegnKey').value;
+// form.addEventListener('patch', function(e) { 
+// 	e.preventDefault();
+// 	const menuItem = {};
+// 	menuItem.name = document.querySelector('#menuName').value;
+// 	menuItem.description = document.querySelector('#menuDescription').value;
+// 	menuItem.calories = document.querySelector('#menuCalorie').value;
+// 	menuItem.price = document.querySelector('#menuPrice').value;
+// 	menuItem.menu_categories_id = document.querySelector('#foriegnKey').value;
 
-	fetch('http://localhost:8001/menuItems', {
-		method: 'PATCH', 
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(menuItem)
-	})
-		.then(res => res.json())
-		.then(data => DisplayMenuItems(data))
-		.catch(err => console.log(err));
+// 	fetch('http://localhost:8001/menuItems', {
+// 		method: 'PATCH', 
+// 		headers: {
+// 			'Content-Type': 'application/json'
+// 		},
+// 		body: JSON.stringify(menuItem)
+// 	})
+// 		.then(res => res.json())
+// 		.then(data => DisplayMenuItems(data))
+// 		.catch(err => console.log(err));
 });

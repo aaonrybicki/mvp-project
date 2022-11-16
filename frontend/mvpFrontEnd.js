@@ -1,5 +1,5 @@
-// const apiUrl = 'https://los-portales.onrender.com/';
-const apiUrl ='http://localhost:8001/';
+const apiUrl = 'https://los-portales.onrender.com/';
+// const apiUrl ='http://localhost:8001/';
 //====event listeners for get method that essentially loads the fetch upon clicking the menuitems button and menucategory button ===//
 const menuItemButton = document.getElementById('menuItems');
 menuItemButton.addEventListener('click', clearData);

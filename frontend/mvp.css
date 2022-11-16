@@ -6,11 +6,7 @@
   }
   .menu {
     height: 100px;  
-    margin-left: 45%;
-  }
-  .img-fluid {
-    height: 90%;
-    
+    margin: auto;
   }
   .div2 {
 
@@ -23,10 +19,7 @@
     height: 500px;
     margin-left: auto;
   }
-  .img-fluid1 {
-  height: auto;
-  width: auto;
-  }
+
   .footer {
     height: 200px;
     background-color: #D6E9FE;    /* Light blue */
@@ -53,13 +46,13 @@
   
   /* Navbar links on mouse-over */
   .topnav a:hover {
-    background-color: #ddd;
+    background-color: rgb(131, 194, 99);
     color: black;
   }
   
   /* Active/current link */
   .topnav a.active {
-    background-color: #2196F3;
+    background-color: #b12600;
     color: white;
   }
   
@@ -109,3 +102,10 @@
       border: 1px solid #ccc;
     }
   }
+  .carousel {
+    width:800px;
+    height:360px;
+    margin: auto;
+  }
+
+

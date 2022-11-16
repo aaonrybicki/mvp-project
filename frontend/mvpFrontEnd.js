@@ -1,9 +1,10 @@
-//====event listeners for get method that essentially loads the fetch upon clicking the menuitems button and menu category button ===//
-const apiUrl = 'https://los-portales.onrender.com/';
-
+// const apiUrl = 'https://los-portales.onrender.com/';
+const apiUrl ='http://localhost:8001/';
+//====event listeners for get method that essentially loads the fetch upon clicking the menuitems button and menucategory button ===//
 const menuItemButton = document.getElementById('menuItems');
 menuItemButton.addEventListener('click', clearData);
 menuItemButton.addEventListener('click', getMenuItems);
+
 const menuCatsButton = document.getElementById('menuCats');
 menuCatsButton.addEventListener('click', clearData);
 menuCatsButton.addEventListener('click', getMenuCategory);
@@ -21,18 +22,16 @@ function getMenuItems() {
 		})
 		.catch(error => console.log('error', error));
 }
-//====Function that creates an array of menu items on the page upon the click of the event handler on line 4=======//
+//=====DisplayMenuItems function that displays menu items to a div======//
 function DisplayMenuItems(result) {
 	for (let i = 0; result.length; i++) {
 		const divSection2 = document.getElementById('displaySection');
 		const foodItems = result[i];
 		console.log(foodItems);
-
 		const name = foodItems.name;
 		const description = foodItems.description;
 		const calories = foodItems.calories;
-		const price = foodItems.price;
-		// create divs and appends so it shows up in the selected div
+		const price = foodItems.price; 
 		var ul = document.createElement('ul');
 		const foodNameDiv = document.createElement('h1');
 		foodNameDiv.innerHTML = name;
@@ -41,7 +40,7 @@ function DisplayMenuItems(result) {
 		h1Button.innerHTML = 'delete this menu item';
 		ul.setAttribute('id', foodItems.id);
 		ul.append(h1Button);
-		//==== delete event handler with a button to delete the menu item selected this is where the crud operation DELETE is=//
+		//==========CRUD OPERATION DELETE with an event listener=====//
 		h1Button.addEventListener('click', function(e){
 			var id = e.target.parentNode.id;
 			e.target.parentElement.remove();
@@ -68,7 +67,7 @@ function DisplayMenuItems(result) {
 	}
 }
 
-// this function does the same as the get menu items 
+//=====crud operation GET for menuCategories note: the event listener button is located on line 11====//
 function getMenuCategory() {
 	var requestOptions = {
 		method: 'GET',
@@ -97,12 +96,11 @@ function DisplayMenuCategory(result) {
 		ul.appendChild(categoryHeader);          
 	}
 }
-
+//=====================Function that clears the data in the displaySection=================//
 function clearData() {
 	document.getElementById('displaySection').innerHTML = '';
 }
-
-// const form = document.getElementById('form');
+//======================CRUD OPERATION POST==============================//
 const addButton = document.getElementById('submit');
 addButton.addEventListener('click', function(e) { 
 	e.preventDefault();
@@ -113,7 +111,7 @@ addButton.addEventListener('click', function(e) {
 	menuItem.price = document.querySelector('#menuPrice').value;
 	menuItem.menu_categories_id = document.querySelector('#foriegnKey').value;
 	
-
+	
 	fetch(apiUrl + 'menuItems', {
 		method: 'POST', 
 		headers: {
@@ -125,6 +123,7 @@ addButton.addEventListener('click', function(e) {
 		.then(data => DisplayMenuItems(data))
 		.catch(err => console.log(err));
 });
+//=====================CRUD OPERATION PATCH==========================//
 const updateButton = document.getElementById('update');
 updateButton.addEventListener('click', function(e) { 
 	e.preventDefault();
@@ -148,5 +147,5 @@ updateButton.addEventListener('click', function(e) {
 		.then(data => DisplayMenuItems(data))
 		
 		.catch(err => console.log(err));
-	// setTimeout(menuItemButton.click(), 3000);
+	
 });

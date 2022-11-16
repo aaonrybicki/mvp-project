@@ -71,24 +71,6 @@ app.patch('/menuItems', (req, res) => {
 		.catch(e => console.error(e.stack));
 });
 
-// app.patch('/menuItems/:id', (req, res)=> {
-// 	var menuItems= req.body;
-// 	var name= menuItems.name;
-// 	var description= menuItems.description;
-// 	var calories=parseInt(menuItems.calories);
-// 	var price=parseInt(menuItems.price);
-// 	var menu_categories_id= parseInt(menuItems.menu_categories_id); 
-// 	let id = req.params.id;
-// 	let query = 'UPDATE menuItems SET name=$1, description=$2, calories=$3, price=$4, menu_categories_id=$5 WHERE id=$6';
-// 	let values = [name, description, calories, price, menu_categories_id, id];
-// 	console.log(values);
-          
-// 	pool.query(query, values)
-// 		.then((result) => {
-// 			res.status(200).send(result.rows);
-// 		})
-// 		.catch((err) => console.error(err.stack));
-// });
 
 
 app.delete('/menuItems/:id', (req, res) => {
